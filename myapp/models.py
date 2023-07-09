@@ -1,5 +1,9 @@
 from django.db import models
 
+# 1. Create your models here
+# 2. Create migrations: python manage.py makemigrations
+# 3. Migrate: python manage.py migrate
+
 class Person(models.Model):
     name = models.CharField(max_length=50, verbose_name="Имя")
     age = models.IntegerField(verbose_name="Возраст")
