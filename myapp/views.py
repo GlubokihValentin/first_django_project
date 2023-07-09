@@ -9,5 +9,7 @@ def about(request):
 def login(request):
     return HttpResponse("<h2>LOGIN</h2>")
 
-def contact(request):
-    return HttpResponse("<h3>CONTACT</h3>")
+def contact(request, id):
+    name = request.GET.get('name')
+    age = request.GET.get('age')
+    return HttpResponse(f'Page contact, id={id}, name={name}, age={age}')

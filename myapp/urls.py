@@ -5,5 +5,5 @@ urlpatterns = [
     path('', index),
     path('about/', about),
     path('login/', login),
-    path('contact/<int:id>', contact),
+    path('contact/<int:id>/', contact),
 ]
