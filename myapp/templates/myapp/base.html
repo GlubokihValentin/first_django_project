@@ -5,6 +5,10 @@
     <title>{{title}}</title>
 </head>
 <body>
+
+{% block content %}
+{% endblock content %}
+
 {% block mainmenu %}
 <ul>
     {% for m in menu %}
@@ -12,9 +16,6 @@
     {% endfor %}
 </ul>
 {% endblock mainmenu %}
-
-{% block content %}
-{% endblock content %}
 
 </body>
 </html>

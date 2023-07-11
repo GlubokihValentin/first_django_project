@@ -2,6 +2,7 @@
 
 {% block content %}
 
-<h2>Cars page content</h2>
-
+<h2>Содержание страницы Автомобили</h2>
+<h1>{{title}}</h1>
+<p><a href="{% url 'add_car' %}">Добавить автомобиль</a></p>
 {% endblock content%}
