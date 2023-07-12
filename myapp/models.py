@@ -9,13 +9,17 @@ class Person(models.Model):
     age = models.IntegerField(verbose_name="Возраст")
     city = models.CharField(max_length=100, verbose_name="Город")
     is_activated = models.BooleanField(verbose_name="Активация")
-
     class Meta:
         verbose_name = "Человек"
         verbose_name_plural = "Люди"
-
     def __str__(self):
         return ' '.join([str(self.name), str(self.city)])
+
+class Driver(models.Model):
+    name = models.CharField(max_length=50, verbose_name="Имя водителя")
+    age = models.IntegerField(verbose_name="Возраст")
+    city = models.CharField(max_length=50, verbose_name="Город")
+
 
 class Car(models.Model):
     brand = models.CharField(max_length=30, verbose_name="Бренд")
@@ -41,9 +45,3 @@ class Client(models.Model):
     email = models.EmailField(verbose_name='Эл. почта')
     created_at = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        verbose_name = "Клиент"
-        verbose_name_plural = "Клиенты"
-
-    def __str__(self):
-        return ' '.join([str(self.name), str(self.last_name)])

@@ -1,8 +1,27 @@
 {% extends 'myapp/base.html' %}
 
 {% block content %}
-
-<h2>Содержание страницы Автомобили</h2>
 <h1>{{title}}</h1>
+<h2>Автомобиль</h2>
+
+<table id="cars" border="1">
+    <th>id</th>
+    <th>Производитель (марка)</th>
+    <th>Модель</th>
+    <th>Цвет</th>
+    <th>Мощность</th>
+    <th>Год выпуска</th>
+
+{% for car in cars %}
+        <tr>
+            <td align="center">{{car.id}}</td>
+            <td align="center">{{car.brand}}</td>
+            <td align="center">{{car.model}}</td>
+            <td align="center">{{car.color}}</td>
+            <td align="center">{{car.power}}</td>
+            <td align="center">{{car.years}}</td>
+        </tr>
+{% endfor %}
+</table>
 <p><a href="{% url 'add_car' %}">Добавить автомобиль</a></p>
-{% endblock content%}
+{% endblock content %}
