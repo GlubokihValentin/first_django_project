@@ -1,0 +1,36 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<h2>Автомобиль</h2>
+<table border="2">
+    <tr>
+        <td>id</td>
+        <td>{{car.id}}</td>
+    </tr>
+    <tr>
+        <td>Производитель(марка)</td>
+        <td>{{car.brand}}</td>
+    </tr>
+    <tr>
+        <td>Модель</td>
+        <td>{{car.model}}</td>
+    </tr>
+    <tr>
+        <td>Цвет</td>
+        <td>{{car.color}}</td>
+    </tr>
+    <tr>
+        <td>Мощность</td>
+        <td>{{car.power}}</td>
+    </tr>
+    <tr>
+        <td>Год выпуска</td>
+        <td>{{car.years}}</td>
+    </tr>
+
+</table>
+
+
+
+{% endblock content %}

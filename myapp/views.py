@@ -1,5 +1,5 @@
 import datetime
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from myapp.forms import CarForm, ClientForm, DriverForm
@@ -19,27 +19,6 @@ def about(request):
     title = 'О сайте'
     context = {'title': title, 'menu': menu}
     return render(request, 'myapp/about.html', context=context)
-
-
-
-def drivers(request):
-    title = 'Водители парка'
-    drivers = Driver.objects.all()
-    context = {'title': title, 'menu': menu, 'drivers': drivers}
-    return render(request, 'myapp/drivers.html', context=context)
-
-def cars(request):
-    title = 'Машины парка'
-    cars = Car.objects.all()
-    context = {'title': title, 'menu': menu, 'cars': cars}
-    return render(request, 'myapp/cars.html', context=context)
-
-def clients(request):
-    title = 'Клиенты парка'
-    clients = Client.objects.all()
-    context = {'title': title, 'menu': menu, 'clients': clients}
-    return render(request, 'myapp/clients.html', context=context)
-
 @csrf_protect
 def login(request):
 
@@ -61,6 +40,34 @@ def contact(request, id):
     get_params = {'name': name, 'age': age}
     return HttpResponse(f'Page contact, url_parametr_id = {url_id}, get_params = {get_params}')
 
+
+
+def drivers(request):
+    title = 'Водители парка'
+    drivers = Driver.objects.all()
+    context = {'title': title, 'menu': menu, 'drivers': drivers}
+    return render(request, 'myapp/drivers.html', context=context)
+
+def add_driver(request):
+
+    title = 'Добавить водителя'
+
+    if request.method == 'POST':
+        form = DriverForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return drivers(request)
+    else:
+        form = DriverForm()
+        context = {'title': title, 'menu': menu, 'form': form}
+        return render(request, 'myapp/driver_add.html', context=context)
+
+def cars(request):
+    title = 'Машины парка'
+    cars = Car.objects.all()
+    context = {'title': title, 'menu': menu, 'cars': cars}
+    return render(request, 'myapp/cars.html', context=context)
+
 def add_car(request):
     title = 'Добавить машину'
     if request.method == "GET":
@@ -80,6 +87,20 @@ def add_car(request):
             form.save()
             return cars(request)
 
+def car_card(request, pk):
+    title='Информация об автомобиле'
+    # client=Client.objects.get(pk=pk)
+    car = get_object_or_404(Car, pk=pk)
+    context={'title': title, 'menu': menu, 'car': car}
+
+    return render(request, 'myapp/car_card.html', context=context)
+
+def clients(request):
+    title = 'Клиенты парка'
+    clients = Client.objects.all()
+    context = {'title': title, 'menu': menu, 'clients': clients}
+    return render(request, 'myapp/clients.html', context=context)
+
 def add_client(request):
 
     title = 'Добавить клиента'
@@ -98,16 +119,10 @@ def add_client(request):
         context ={'title': title, 'menu': menu, 'form': form}
         return render(request, 'myapp/client_add.html', context=context)
 
-def add_driver(request):
+def client_card(request, pk):
+    title='Информация о клиенте'
+    # client=Client.objects.get(pk=pk)
+    client = get_object_or_404(Client, pk=pk)
+    context={'title': title, 'menu': menu, 'client': client}
 
-    title = 'Добавить водителя'
-
-    if request.method == 'POST':
-        form = DriverForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return drivers(request)
-    else:
-        form = DriverForm()
-        context = {'title': title, 'menu': menu, 'form': form}
-        return render(request, 'myapp/driver_add.html', context=context)
+    return render(request, 'myapp/client_card.html', context=context)

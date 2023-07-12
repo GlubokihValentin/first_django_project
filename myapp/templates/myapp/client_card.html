@@ -1,0 +1,48 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<h2>Клиент</h2>
+<table border="2">
+    <tr>
+        <td>id</td>
+        <td>{{client.id}}</td>
+    </tr>
+    <tr>
+        <td>Имя</td>
+        <td>{{client.name}}</td>
+    </tr>
+    <tr>
+        <td>Фамилия</td>
+        <td>{{client.last_name}}</td>
+    </tr>
+    <tr>
+        <td>Дата рождения</td>
+        <td>{{client.birthday}}</td>
+    </tr>
+    <tr>
+        <td>Возраст</td>
+        <td>{{client.age}}</td>
+    </tr>
+    <tr>
+        <td>Город</td>
+        <td>{{client.city}}</td>
+    </tr>
+    <tr>
+        <td>Телефон</td>
+        <td>{{client.phone}}</td>
+    </tr>
+    <tr>
+        <td>Эл.почта</td>
+        <td>{{client.email}}</td>
+    </tr>
+    <tr>
+        <td>Дата создания</td>
+        <td>{{client.created_at}}</td>
+    </tr>
+
+</table>
+
+
+
+{% endblock content %}
