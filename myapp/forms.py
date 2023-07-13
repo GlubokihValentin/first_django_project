@@ -8,15 +8,17 @@ def year_choices():
 
 def current_year():
     return datetime.date.today().year
+
 class CarForm(ModelForm):
     class Meta:
         model = Car
         # exclude = ['age']
         fields = '__all__'
+
 class DriverForm(ModelForm):
     class Meta:
         model = Driver
-        # exclude = ['age']
+        # exclude = ['last_name']
         fields = '__all__'
 
 class ClientForm(ModelForm):

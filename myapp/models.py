@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 # 1. Create your models here
 # 2. Create migrations: python manage.py makemigrations
@@ -17,6 +19,9 @@ class Person(models.Model):
 
 class Driver(models.Model):
     name = models.CharField(max_length=50, verbose_name="Имя водителя")
+    # last_name = models.CharField(max_length=50, verbose_name="Фамилия")
+    # experience = models.CharField(max_length=50, verbose_name="Стаж вождения")
+    # category = models.CharField(max_length=30, verbose_name="Категория")
     age = models.IntegerField(verbose_name="Возраст")
     city = models.CharField(max_length=50, verbose_name="Город")
 
@@ -45,3 +50,25 @@ class Client(models.Model):
     email = models.EmailField(verbose_name='Эл. почта')
     created_at = models.DateTimeField(auto_now_add=True)
 
+class Employee(models.Model):
+    edu_choices = [('middle', 'среднее'),
+                   ('high', 'высшее'),
+                   ('professional', 'профессиональное'),
+    ]
+    firstname = models.CharField(max_length=30, verbose_name='Имя')
+    lastname = models.CharField(max_length=30, verbose_name='Фамилия')
+    birthday = models.DateField(verbose_name='Дата рождения')
+    position = models.CharField(max_length=50, verbose_name='Должность')
+    education = models.CharField(max_length=30, choices=edu_choices)
+
+    def __str__(self):
+        return ''.join([str(self.firstname), str(self.lastname)])
+
+    def get_absolute_url(self):
+        return reverse('employee_list')
+    # def get_absolute_url(self):
+    #     return reverse('author-detail', kwargs={"pk": self.pk})
+
+    class Meta:
+        verbose_name = 'Сотрудник'
+        verbose_name_plural = 'Сотрудники'

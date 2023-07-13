@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'myapp/base.html' %}
 
-</body>
-</html>
+{% block content %}
+<h1>{{title}}</h1>
+<h2>Водитель</h2>
+<table border="2">
+    <tr>
+        <td>id</td>
+        <td>{{driver.id}}</td>
+    </tr>
+    <tr>
+        <td>Имя</td>
+        <td>{{driver.name}}</td>
+    </tr>
+<!--    <tr>-->
+<!--        <td>Фамилия</td>-->
+<!--        <td>{{driver.last_name}}</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td>Стаж вождения</td>-->
+<!--        <td>{{driver.experience}}</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td>Категория</td>-->
+<!--        <td>{{driver.category}}</td>-->
+<!--    </tr>-->
+    <tr>
+        <td>Возраст</td>
+        <td>{{driver.age}}</td>
+    </tr>
+    <tr>
+        <td>Город</td>
+        <td>{{driver.city}}</td>
+    </tr>
+
+
+</table>
+
+
+
+{% endblock content %}

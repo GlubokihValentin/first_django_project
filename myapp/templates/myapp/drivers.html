@@ -7,23 +7,28 @@
 <table id="drivers" border="1">
     <th>id</th>
     <th>Имя</th>
+<!--    <th>Фамилия</th>-->
+<!--    <th>Стаж вождения</th>-->
+<!--    <th>Категория</th>-->
     <th>Возраст</th>
     <th>Город</th>
 
 {% for driver in drivers %}
         <tr>
             <td align="center">{{driver.id}}</td>
-            <td align="center">{{driver.name}}</td>
+            <td align="center">
+                <a href="{% url 'driver_card' pk=driver.id %}">{{driver.name}}</a>
+            </td>
+<!--            <td align="center">{{driver.last_name}}</td>-->
+<!--            <td align="center">{{driver.experience}}</td>-->
+<!--            <td align="center">{{driver.category}}</td>-->
             <td align="center">{{driver.age}}</td>
             <td align="center">{{driver.city}}</td>
 
         </tr>
-    {% endfor %}
+{% endfor %}
 </table>
-
-
 <p><a href="{% url 'add_driver' %}">Добавить водителя</a></p>
-
 {% endblock content %}
 
 

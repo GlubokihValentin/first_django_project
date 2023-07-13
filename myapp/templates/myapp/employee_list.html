@@ -1,0 +1,30 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<h2>Сотрудник</h2>
+
+<table id="employee" border="1">
+    <th>id</th>
+    <th>Имя</th>
+    <th>Фамилия</th>
+    <th>Дата рождения</th>
+    <th>Должность</th>
+    <th>Образование</th>
+
+{% for emp in employees %}
+        <tr>
+            <td align="center">{{emp.id}}</td>
+            <td align="center">
+                <a href="{% url 'employee_detail' pk=emp.id %}">{{emp.firstname}}</a>
+            </td>
+            <td align="center">{{emp.lastname}}</td>
+            <td align="center">{{emp.birthday}}</td>
+            <td align="center">{{emp.position}}</td>
+            <td align="center">{{emp.education}}</td>
+        </tr>
+{% endfor %}
+</table>
+<p><a href="{% url 'employee_list' %}">Добавить сотрудника</a></p>
+{% endblock content %}
+

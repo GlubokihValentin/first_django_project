@@ -2,14 +2,17 @@ import datetime
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
+from django.views.generic import ListView, CreateView, DetailView, UpdateView
+
 from myapp.forms import CarForm, ClientForm, DriverForm
-from myapp.models import Car, Client, Driver
+from myapp.models import *
 
 menu = [
     {'title': 'О сайте', 'url_name': 'about'},
     {'title': 'Машины парка', 'url_name': 'cars'},
     {'title': 'Водители парка', 'url_name': 'drivers'},
     {'title': 'Клиенты парка', 'url_name': 'clients'},
+    {'title': 'Сотрудники', 'url_name': 'employee_list'}
     ]
 def index(request):
     title = 'Главная страница'
@@ -62,6 +65,14 @@ def add_driver(request):
         context = {'title': title, 'menu': menu, 'form': form}
         return render(request, 'myapp/driver_add.html', context=context)
 
+def driver_card(request, pk):
+    title='Информация о водителе'
+    # client=Client.objects.get(pk=pk)
+    driver = get_object_or_404(Driver, pk=pk)
+    context={'title': title, 'menu': menu, 'driver': driver}
+
+    return render(request, 'myapp/driver_card.html', context=context)
+
 def cars(request):
     title = 'Машины парка'
     cars = Car.objects.all()
@@ -70,11 +81,6 @@ def cars(request):
 
 def add_car(request):
     title = 'Добавить машину'
-    if request.method == "GET":
-        form = CarForm()
-        context = {'title': title, 'menu': menu, 'form': form}
-        return render(request, 'myapp/car_add.html', context=context)
-
     if request.method == 'POST':
         form = CarForm(request.POST)
         if form.is_valid():
@@ -86,6 +92,11 @@ def add_car(request):
             # car.year = form.cleaned_data['years']
             form.save()
             return cars(request)
+
+    if request.method == "GET":
+        form = CarForm()
+        context = {'title': title, 'menu': menu, 'form': form}
+        return render(request, 'myapp/car_add.html', context=context)
 
 def car_card(request, pk):
     title='Информация об автомобиле'
@@ -126,3 +137,39 @@ def client_card(request, pk):
     context={'title': title, 'menu': menu, 'client': client}
 
     return render(request, 'myapp/client_card.html', context=context)
+
+class EmployeeList(ListView):
+    model = Employee
+    template_name = 'myapp/employee_list.html'
+    context_object_name = 'employees'
+
+    def get_context_data(self, **kwargs):
+        # получение общего контекста из родительского класса
+        context = super().get_context_data(**kwargs)
+        # изменение родительского контекста (добавление ключей словаря)
+        context['title'] = 'Сотрудники'
+        context['count'] = Employee.objects.count()
+        context['menu'] = menu
+        return context
+
+class EmployeeDetail(DetailView):
+    model = Employee
+    template_name = 'myapp/employee_detail.html'
+    context_object_name = 'employee'
+
+    def get_context_data(self, **kwargs):
+        # получение общего контекста из родительского класса
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Информация о сотруднике'
+        context['menu'] = menu
+        return context
+
+class EmployeeCreate(CreateView):
+    model = Employee
+    fields = '__all__'
+    template_name = 'myapp/employee_form.html'
+
+class EmployeeUpdate(UpdateView):
+    model = Employee
+    fields = '__all__'
+    template_name_suffix = '_update_form'
