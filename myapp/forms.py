@@ -28,3 +28,9 @@ class ClientForm(ModelForm):
         # fields = ['name', 'last_name']
 
     birthday = forms.DateField(input_formats=DATE_INPUT_FORMAT, label='Дата рождения')
+
+class EmployeeForm(ModelForm):
+    # birthday = forms.DateField(input_formats=DATE_INPUT_FORMAT, label='Дата рождения', widget=forms.DateInput(attrs={'type': 'date'}))
+    class Meta:
+        model = Employee
+        fields = '__all__'

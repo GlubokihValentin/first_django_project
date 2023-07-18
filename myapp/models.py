@@ -51,7 +51,7 @@ class Client(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Employee(models.Model):
-    edu_choices = [('middle', 'среднее'),
+    edu_choises = [('middle', 'среднее'),
                    ('high', 'высшее'),
                    ('professional', 'профессиональное'),
     ]
@@ -59,7 +59,7 @@ class Employee(models.Model):
     lastname = models.CharField(max_length=30, verbose_name='Фамилия')
     birthday = models.DateField(verbose_name='Дата рождения')
     position = models.CharField(max_length=50, verbose_name='Должность')
-    education = models.CharField(max_length=30, choices=edu_choices)
+    education = models.CharField(max_length=30, choices=edu_choises)
 
     def __str__(self):
         return ''.join([str(self.firstname), str(self.lastname)])

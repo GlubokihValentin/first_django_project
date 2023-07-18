@@ -1,10 +1,11 @@
 import datetime
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_protect
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
-from myapp.forms import CarForm, ClientForm, DriverForm
+from myapp.forms import CarForm, ClientForm, DriverForm, EmployeeForm
 from myapp.models import *
 
 menu = [
@@ -142,6 +143,7 @@ class EmployeeList(ListView):
     model = Employee
     template_name = 'myapp/employee_list.html'
     context_object_name = 'employees'
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         # получение общего контекста из родительского класса
@@ -167,9 +169,15 @@ class EmployeeDetail(DetailView):
 class EmployeeCreate(CreateView):
     model = Employee
     fields = '__all__'
+    # form_class = EmployeeForm
     template_name = 'myapp/employee_form.html'
 
 class EmployeeUpdate(UpdateView):
     model = Employee
     fields = '__all__'
-    template_name_suffix = '_update_form'
+    template_name = 'myapp/employee_update.html'
+
+class EmployeeDelete(DeleteView):
+    model = Employee
+    template_name = 'myapp/employee_delete.html'
+    success_url = reverse_lazy('employee_list')
