@@ -16,7 +16,7 @@
         <tr>
             <td align="center">{{car.id}}</td>
             <td align="center">
-                <a href="{% url 'car_card' pk=car.id %}">{{car.brand}}</a>
+                <a href="{% url 'myapp:car_card' pk=car.id %}">{{car.brand}}</a>
             </td>
             <td align="center">{{car.model}}</td>
             <td align="center">{{car.color}}</td>
@@ -25,5 +25,5 @@
         </tr>
 {% endfor %}
 </table>
-<p><a href="{% url 'add_car' %}">Добавить автомобиль</a></p>
+<p><a href="{% url 'myapp:add_car' %}">Добавить автомобиль</a></p>
 {% endblock content %}

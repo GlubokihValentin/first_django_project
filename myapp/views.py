@@ -9,11 +9,11 @@ from myapp.forms import CarForm, ClientForm, DriverForm, EmployeeForm
 from myapp.models import *
 
 menu = [
-    {'title': 'О сайте', 'url_name': 'about'},
-    {'title': 'Машины парка', 'url_name': 'cars'},
-    {'title': 'Водители парка', 'url_name': 'drivers'},
-    {'title': 'Клиенты парка', 'url_name': 'clients'},
-    {'title': 'Сотрудники', 'url_name': 'employee_list'}
+    {'title': 'О сайте', 'url_name': 'myapp:about'},
+    {'title': 'Машины парка', 'url_name': 'myapp:cars'},
+    {'title': 'Водители парка', 'url_name': 'myapp:drivers'},
+    {'title': 'Клиенты парка', 'url_name': 'myapp:clients'},
+    {'title': 'Сотрудники', 'url_name': 'myapp:employee_list'}
     ]
 def index(request):
     title = 'Главная страница'
